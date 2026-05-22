@@ -1,17 +1,20 @@
 export type Severity = 'error' | 'warning' | 'info';
 
 export interface RuleViolation {
-  ruleId: string;
-  severity: Severity;
   message: string;
-  file: string;
-  line?: number;
-  path?: string;
+  path: string;
+  severity: Severity;
 }
 
 export interface RuleContext {
-  file: string;
-  workflow: Record<string, unknown>;
+  workflow: {
+    name?: string;
+    on?: unknown;
+    permissions?: unknown;
+    jobs?: Record<string, unknown>;
+    env?: Record<string, unknown>;
+  };
+  filePath: string;
 }
 
 export interface Rule {

@@ -1,23 +1,28 @@
-import { Rule } from './rule';
+import { Rule, Severity } from './rule';
 import { noPlaintextSecrets } from './no-plaintext-secrets';
 import { noUnpinnedActions } from './no-unpinned-actions';
+import { noWriteAllPermissions } from './no-write-all-permissions';
 
-export const allRules: Rule[] = [
+const ALL_RULES: Rule[] = [
   noPlaintextSecrets,
   noUnpinnedActions,
+  noWriteAllPermissions,
 ];
 
 export function getRuleById(id: string): Rule | undefined {
-  return allRules.find((rule) => rule.id === id);
+  return ALL_RULES.find((rule) => rule.id === id);
 }
 
-export function getRulesForSeverity(severity: 'error' | 'warning'): Rule[] {
-  // Rules don't declare a blanket severity — violations do.
-  // This helper is a convenience for consumers that want to filter
-  // the registered rule list by some other criterion in the future.
-  void severity;
-  return allRules;
+export function getRulesForSeverity(severity: Severity): Rule[] {
+  const order: Severity[] = ['error', 'warning', 'info'];
+  const threshold = order.indexOf(severity);
+  return ALL_RULES.filter(
+    (rule) => order.indexOf(rule.severity) <= threshold
+  );
 }
 
-export { noPlaintextSecrets, noUnpinnedActions };
-export type { Rule } from './rule';
+export function getAllRules(): Rule[] {
+  return [...ALL_RULES];
+}
+
+export { Rule, RuleViolation, RuleContext, Severity } from './rule';
