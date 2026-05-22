@@ -4,6 +4,8 @@ import { noUnpinnedActions } from './no-unpinned-actions';
 import { noWriteAllPermissions } from './no-write-all-permissions';
 import { noPullRequestTarget } from './no-pull-request-target';
 import { noCurlBash } from './no-curl-bash';
+import { noDeprecatedActions } from './no-deprecated-actions';
+import { noSelfHostedRunners } from './no-self-hosted-runners';
 
 const ALL_RULES: Rule[] = [
   noPlaintextSecrets,
@@ -11,6 +13,8 @@ const ALL_RULES: Rule[] = [
   noWriteAllPermissions,
   noPullRequestTarget,
   noCurlBash,
+  noDeprecatedActions,
+  noSelfHostedRunners,
 ];
 
 export function getAllRules(): Rule[] {
@@ -22,7 +26,7 @@ export function getRuleById(id: string): Rule | undefined {
 }
 
 export function getRulesForSeverity(
-  severity: 'error' | 'warning' | 'info'
+  severity: Rule['severity']
 ): Rule[] {
   return ALL_RULES.filter((rule) => rule.severity === severity);
 }
