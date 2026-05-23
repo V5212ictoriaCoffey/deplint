@@ -1,16 +1,20 @@
 import { Rule } from './rule';
-import { noPlaintextSecrets } from './no-plaintext-secrets';
-import { noUnpinnedActions } from './no-unpinned-actions';
-import { noWriteAllPermissions } from './no-write-all-permissions';
-import { noPullRequestTarget } from './no-pull-request-target';
-import { noCurlBash } from './no-curl-bash';
-import { noDeprecatedActions } from './no-deprecated-actions';
-import { noSelfHostedRunners } from './no-self-hosted-runners';
-import { noSecretsInEnv } from './no-secrets-in-env';
-import { noEnvContextInIf } from './no-env-context-in-if';
-import { noScriptInjection } from './no-script-injection';
-import { noCheckoutWithoutPersistCredentials } from './no-checkout-without-persist-credentials';
-import { noMissingTimeout } from './no-missing-timeout';
+import noPlaintextSecrets from './no-plaintext-secrets';
+import noUnpinnedActions from './no-unpinned-actions';
+import noWriteAllPermissions from './no-write-all-permissions';
+import noPullRequestTarget from './no-pull-request-target';
+import noCurlBash from './no-curl-bash';
+import noDeprecatedActions from './no-deprecated-actions';
+import noSelfHostedRunners from './no-self-hosted-runners';
+import noSecretsInEnv from './no-secrets-in-env';
+import noEnvContextInIf from './no-env-context-in-if';
+import noScriptInjection from './no-script-injection';
+import noCheckoutWithoutPersistCredentials from './no-checkout-without-persist-credentials';
+import noMissingTimeout from './no-missing-timeout';
+import noIfAlwaysTrue from './no-if-always-true';
+import noUnprotectedEnvironment from './no-unprotected-environment';
+import noMatrixInjection from './no-matrix-injection';
+import noWorkflowDispatchInputsUnvalidated from './no-workflow-dispatch-inputs-unvalidated';
 
 const ALL_RULES: Rule[] = [
   noPlaintextSecrets,
@@ -25,6 +29,10 @@ const ALL_RULES: Rule[] = [
   noScriptInjection,
   noCheckoutWithoutPersistCredentials,
   noMissingTimeout,
+  noIfAlwaysTrue,
+  noUnprotectedEnvironment,
+  noMatrixInjection,
+  noWorkflowDispatchInputsUnvalidated,
 ];
 
 export function getAllRules(): Rule[] {
